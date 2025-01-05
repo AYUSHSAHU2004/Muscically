@@ -39,8 +39,24 @@ io.on("connection", (socket) => {
     io.to(to).emit("peer:nego:needed", { from: socket.id, offer });
   });
 
+  socket.on("play:audio",({id})=>{
+    socket.broadcast.emit("play:audio1",{id});
+  })
+  socket.on("pause:audio",({id})=>{
+    socket.broadcast.emit("pause:audio1",{id});
+  })
+  socket.on("seek:forward",({id})=>{
+    socket.broadcast.emit("seek:forward1",{id});
+  })
+  socket.on("seek:backward",({id})=>{
+    socket.broadcast.emit("seek:backward1",{id});
+  })
   socket.on("peer:nego:done", ({ to, ans }) => {
     console.log("peer:nego:done", ans);
     io.to(to).emit("peer:nego:final", { from: socket.id, ans });
   });
+
+  socket.on("play:song",({id})=>{
+    socket.broadcast.emit(`play:song1,${id}`);
+  })
 });
