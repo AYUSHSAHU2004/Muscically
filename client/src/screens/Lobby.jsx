@@ -19,7 +19,7 @@ const LobbyScreen = () => {
 
   const handleJoinRoom = useCallback(
     (data) => {
-      const { email, room } = data;
+      const { room } = data;
       navigate(`/room/${room}`);
     },
     [navigate]
@@ -33,27 +33,85 @@ const LobbyScreen = () => {
   }, [socket, handleJoinRoom]);
 
   return (
-    <div>
-      <h1>Lobby</h1>
-      <form onSubmit={handleSubmitForm}>
-        <label htmlFor="email">Email ID</label>
-        <input
-          type="email"
-          id="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <br />
-        <label htmlFor="room">Room Number</label>
-        <input
-          type="text"
-          id="room"
-          value={room}
-          onChange={(e) => setRoom(e.target.value)}
-        />
-        <br />
-        <button>Join</button>
-      </form>
+    <div
+      style={{
+        height: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        background: "linear-gradient(to bottom, #ffe4e6, #ffffff)",
+      }}
+    >
+      <div
+        style={{
+          backgroundColor: "#fff0f3",
+          borderRadius: "10px",
+          padding: "30px",
+          boxShadow: "0 4px 10px rgba(0, 0, 0, 0.2)",
+          width: "90%",
+          maxWidth: "400px",
+          textAlign: "center",
+        }}
+      >
+        <h1
+          style={{
+            margin: "0",
+            marginBottom: "20px",
+            color: "#ff6b81",
+            fontSize: "2.5rem",
+            fontWeight: "bold",
+          }}
+        >
+          DuetVibe
+        </h1>
+        <form
+          onSubmit={handleSubmitForm}
+          style={{ display: "flex", flexDirection: "column", gap: "15px" }}
+        >
+          <label htmlFor="email" style={{ fontWeight: "bold" }}>
+            Email ID
+          </label>
+          <input
+            type="email"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            style={{
+              padding: "10px",
+              border: "1px solid #ddd",
+              borderRadius: "5px",
+            }}
+          />
+          <label htmlFor="room" style={{ fontWeight: "bold" }}>
+            Room Number
+          </label>
+          <input
+            type="text"
+            id="room"
+            value={room}
+            onChange={(e) => setRoom(e.target.value)}
+            style={{
+              padding: "10px",
+              border: "1px solid #ddd",
+              borderRadius: "5px",
+            }}
+          />
+          <button
+            type="submit"
+            style={{
+              padding: "10px",
+              backgroundColor: "#ff6b81",
+              color: "#fff",
+              border: "none",
+              borderRadius: "5px",
+              fontWeight: "bold",
+              cursor: "pointer",
+            }}
+          >
+            Join
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

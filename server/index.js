@@ -21,8 +21,8 @@ io.on("connection", (socket) => {
     io.to(socket.id).emit("room:join", data);
   });
 
-  socket.on("user:call", ({ to, offer }) => {
-    io.to(to).emit("incomming:call", { from: socket.id, offer });
+  socket.on("user:call", ({ to, offer,cfu }) => {
+    io.to(to).emit("incomming:call", { from: socket.id, offer,cfu });
   });
 
 
@@ -51,10 +51,16 @@ io.on("connection", (socket) => {
   socket.on("seek:backward",({id})=>{
     socket.broadcast.emit("seek:backward1",{id});
   })
+  socket.on("confirm:music",({mu})=>{
+    socket.broadcast.emit("confirm:music1",{mu});
+  })
   socket.on("peer:nego:done", ({ to, ans }) => {
     console.log("peer:nego:done", ans);
     io.to(to).emit("peer:nego:final", { from: socket.id, ans });
   });
+  socket.on("select:song",({sN,rN})=>{
+    socket.broadcast.emit("select:song1",{sN,rN});
+  })
 
   socket.on("play:song",({id})=>{
     socket.broadcast.emit(`play:song1,${id}`);
